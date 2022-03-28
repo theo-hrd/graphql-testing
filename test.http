@@ -13,5 +13,12 @@ Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 query {
-  getMovie
+  getAllCategories {
+      id
+      label
+      movies {
+          id
+          title
+      }
+  }
 }

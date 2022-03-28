@@ -6,10 +6,6 @@
   "scripts": {
     "dev": "DEBUG=*,-nodemon*,-express*,-body-parser* npx nodemon"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+"
-  },
   "author": "",
   "license": "ISC",
   "dependencies": {
