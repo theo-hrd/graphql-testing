@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-
-    "dev": "npx nodemon --watch"
+    "dev": "DEBUG=*,-nodemon*,-express*,-body-parser* npx nodemon"
   },
   "repository": {
     "type": "git",
