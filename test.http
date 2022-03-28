@@ -22,3 +22,15 @@ query {
       }
   }
 }
+
+### récupération d'un movie en fonction de son id
+POST {{ endpoint }}
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query {
+    getMovie(id: 1){
+        id
+        title
+    }
+}
