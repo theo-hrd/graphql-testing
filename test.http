@@ -1,0 +1,96 @@
+################################################################################
+# Fichier de test des routes HTTP de l'API
+# Nécessite l'extension REST Client pour VSCode
+# https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+################################################################################
+@endpoint = http://localhost:{{$dotenv PORT}}/api
+
+### 404
+GET {{ endpoint }}/error404
+
+### Home
+GET {{ endpoint }}/
+
+### Subscribe
+POST {{ endpoint }}/users/signup
+content-type: application/json
+
+{
+    "username": "michel",
+    "email": "michel@oclock.io",
+    "password": "superpass"
+}
+
+### Login
+# @name login
+POST {{ endpoint }}/users/signin
+content-type: application/json
+
+{
+    "email": "yann@oclock.io",
+    "password": "superpass"
+}
+
+###
+@authToken = {{login.response.body.token}}
+
+### Get on user
+GET {{ endpoint }}/users/1
+
+### Add movie
+POST {{ endpoint }}/movies
+Authorization: Bearer {{authToken}}
+content-type: application/json
+
+{
+    "image": "http://",
+    "title": "titre de film",
+    "description": "description de film",
+    "release_year": "2019",
+    "directors": "Steven Spielberg",
+    "countries": "USA",
+    "imdb_id": "FT45"
+}
+
+### Get all movies
+GET {{ endpoint }}/movies
+Authorization: Bearer {{authToken}}
+
+### Get one movie
+GET {{ endpoint }}/movies/1
+Authorization: Bearer {{authToken}}
+
+### Add categories to movie
+POST {{ endpoint }}/movies/1/categories
+Authorization: Bearer {{authToken}}
+content-type: application/json
+
+{
+    "category_ids": [2, 3]
+}
+
+### Get movies from category
+GET {{ endpoint }}/movies/categories/2
+
+### Get all categories
+GET {{ endpoint }}/categories
+
+### Get all categories from a movie
+GET {{ endpoint }}/categories/movies/1
+
+### Add a review to a movie
+POST {{ endpoint }}/reviews
+Authorization: Bearer {{authToken}}
+content-type: application/json
+
+{
+    "movie_id": 1,
+    "rating": 3,
+    "content": "test de review"
+}
+
+### Get all reviews from a movie
+GET {{ endpoint }}/reviews/movies/1
+
+### Get all reviews from a user
+GET {{ endpoint }}/reviews/user/1
