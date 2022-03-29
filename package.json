@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "DEBUG=*,-nodemon*,-express*,-body-parser* npx nodemon"
+    "dev": "DEBUG=*,-nodemon*,-express*,-body-parser* npx nodemon -e js,gql"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^3.6.6",
+    "bcrypt": "^5.0.1",
     "debug": "^4.3.4",
     "dotenv": "^16.0.0",
     "pg": "^8.7.3"

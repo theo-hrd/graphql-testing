@@ -3,11 +3,11 @@
 # Nécessite l'extension REST Client pour VSCode
 # https://marketplace.visualstudio.com/items?itemName=humao.rest-client
 ################################################################################
-@endpoint = http://localhost:{{$dotenv PORT}}/
+@endpoint = http://localhost:{{$dotenv PORT}}/graphql
 
 ### Requête de test
 # En graphQL on utilisera toujours la méthode POST
-# Car c'est dans la body qu'on lui fournira la requête graphQL
+# Car on c'est dans la body qu'on lui fournira la requête graphQL
 POST {{ endpoint }}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
@@ -23,14 +23,50 @@ query {
   }
 }
 
-### récupération d'un movie en fonction de son id
+### Récupération d'un film via son identifiant
 POST {{ endpoint }}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 query {
     getMovie(id: 1){
+        title
+        description
+    }
+}
+
+### Inscription
+POST {{ endpoint }}
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+mutation {
+    signup(username: "Babar", email: "babar@oclock.io", password: "babarpass") {
+        id
+        username
+        email
+    }
+}
+
+
+### Nouveau film
+POST {{ endpoint }}
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+mutation CreateMovie($input: MovieInput!) {
+    createMovie(input: $input) {
         id
         title
+    }
+}
+
+{
+    "input": {
+        "title": "The Godfather",
+        "description": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+        "release_year": 1972,
+        "image": "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,704,1000_AL_.jpg",
+        "imdb_id": "tt0068646"
     }
 }

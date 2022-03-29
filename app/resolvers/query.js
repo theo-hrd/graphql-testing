@@ -1,5 +1,6 @@
 const categoryModel = require('../models/category');
 const movieModel = require('../models/movie');
+const userModel = require('../models/user');
 
 module.exports = {
 
@@ -14,5 +15,4 @@ module.exports = {
         const movie = await movieModel.findByPk(args.id);
         return movie;
     },
-
 };

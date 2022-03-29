@@ -1,5 +1,6 @@
 const Category = require('./category');
-const Query = require('./query')
+const Query = require('./query');
+const Mutation = require('./mutation');
 
 const resolvers = {
 
@@ -7,6 +8,8 @@ const resolvers = {
     Category,
 
     Query,
+
+    Mutation,
 
 };
 
